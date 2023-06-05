@@ -183,6 +183,7 @@ public class StudentDaoImpl implements IStudentDao {
 
 	@Override
 	public Object studentLogin(String id, String password) {
+		System.out.println(id+" "+password);
 		String query = "select * from students where student_id=?";
 		ResultSet res = null;
 		Student obj = null;
@@ -198,7 +199,9 @@ public class StudentDaoImpl implements IStudentDao {
 			res = pstmt.executeQuery();
 
 			if (res.next()) {
-				if (password.equals(res.getString(6))) {
+				System.out.println(res.getString(6));
+				System.out.println(res.getString(5));
+				if (password.equals(res.getString(5))) {
 					student.setStudentId(res.getString(1));
 					student.setName(res.getString(2));
 					student.setEmail(res.getString(3));

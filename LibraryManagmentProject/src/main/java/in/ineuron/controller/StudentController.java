@@ -199,6 +199,7 @@ public class StudentController extends HttpServlet {
 			RequestDispatcher rd = null;
 			if (issuedBooks != null) {
 				session.setAttribute("issuedBooks", issuedBooks);
+				
 				System.out.println(issuedBooks);
 				//response.getWriter().print(issuedBooks);
 				rd = request.getRequestDispatcher("../BooksInYourAccount.jsp");

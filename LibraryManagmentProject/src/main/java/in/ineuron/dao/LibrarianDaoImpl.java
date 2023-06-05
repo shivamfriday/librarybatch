@@ -19,7 +19,7 @@ public class LibrarianDaoImpl implements ILibrarianDao {
 	@Override
 	public String addLibrarian(Librarian librarian) {
 		// TODO Auto-generated method stub
-		String sqlInserQuery = "insert into librarians(`id`,`name`,`email`,`password`,`mobile`)values(?,?,?,?,?)";
+		String sqlInserQuery = "insert into librarians(`id`,`name`,`email`,`password`,`mobile`,`gender`,`dob`)values(?,?,?,?,?,?,?)";
 		try {
 			connection = JdbcUtil.getJdbcConnection();
 			if(connection!=null) {
@@ -33,6 +33,11 @@ public class LibrarianDaoImpl implements ILibrarianDao {
 				pstmt.setString(3,librarian.getEmail());
 				pstmt.setString(4, librarian.getPassword());
 				pstmt.setString(5, librarian.getMobile());
+				pstmt.setString(6, librarian.getGender());
+				
+				java.sql.Date sqlDate = new java.sql.Date(librarian.getDob().getTime());
+				
+				pstmt.setDate(7, sqlDate);
 				
 				int rowAffected = pstmt.executeUpdate();
 				

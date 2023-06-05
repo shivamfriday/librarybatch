@@ -152,7 +152,7 @@ body::-webkit-scrollbar {
 
 <div class="wrapper rounded bg-white" style="margin-top:100px;">
 	<form id="myForm">
-		<div class="h3">Registration Form</div>
+		<div class="h3">Student Registration Form</div>
 
 		<div class="form">
 			<div class="row">

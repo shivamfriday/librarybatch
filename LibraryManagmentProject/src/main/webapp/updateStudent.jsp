@@ -132,7 +132,7 @@ body::-webkit-scrollbar {
 
 <div class="wrapper rounded bg-white">
 <form id="myForm">
-	<div class="h3">Registration Form</div>
+	<div class="h3">Student Update Form</div>
 
 	<div class="form">
 		<div class="row">

@@ -1,14 +1,32 @@
 package in.ineuron.model;
 
+import java.util.Date;
+
 public class Librarian {
 	private String Id;
 	private String name;
 	private String email;
 	private String password;
 	private String mobile;
+	private String gender;
+	private Date dob;
 	
 	
 	
+	
+	
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
 	public String getId() {
 		return Id;
 	}

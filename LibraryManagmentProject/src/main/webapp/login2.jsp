@@ -155,7 +155,7 @@
 
       <!-- Register buttons -->
       <div class="text-center">
-        <p>Not a member? <a href="<%=request.getContextPath()%>/login2.jsp">Register</a></p>
+        <p>Not a member? <a href="<%=request.getContextPath()%>/studentRegistraion.jsp">Register</a></p>
       </div>
     </form>
   </div>

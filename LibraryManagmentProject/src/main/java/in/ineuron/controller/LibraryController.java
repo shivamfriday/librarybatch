@@ -118,40 +118,31 @@ public class LibraryController extends HttpServlet {
 			String studentId = request.getParameter("studentId");
 			String bookId = request.getParameter("bookId");
 
-			
-			String  status = libraryService.removeIssuedBooks(studentId,bookId);
+			String status = libraryService.removeIssuedBooks(studentId, bookId);
 			// System.out.println(IssuedBooks);
 			RequestDispatcher rd = null;
 			if (status != null) {
 				session.setAttribute("status", status);
 				System.out.println(status);
 				response.getWriter().print("success");
-				
-				
+
 				IStudentService studentService = new StudentServiceImpl();
 				System.out.println("the value in controller is :" + studentId);
 				ArrayList<IssuedBooks> issuedBooks = studentService.booksTakenByStudentForReturn(studentId);
 				// System.out.println(IssuedBooks);
-				//RequestDispatcher rd1 = null;
+				// RequestDispatcher rd1 = null;
 				if (issuedBooks != null) {
 					session.setAttribute("issuedBooks", issuedBooks);
 					System.out.println(issuedBooks);
-					//response.getWriter().print("success");
+					// response.getWriter().print("success");
 
 					// rd.forward(request, response);
 
 				} else {
 					// PrintWriter out = response.getWriter();
 					session.setAttribute("issuedBooks", null);
-					
-					
+
 				}
-				
-				
-				
-				
-				
-				
 
 				// rd.forward(request, response);
 
@@ -164,58 +155,54 @@ public class LibraryController extends HttpServlet {
 			}
 
 		}
-		
+
 		if (request.getRequestURI().endsWith("getStudent")) {
 			IStudentService studentService = new StudentServiceImpl();
-			
+
 			String studentId = request.getParameter("studentId");
-			
+
 			Student student = studentService.searchStudent(studentId);
-			
-			//Gson gson = new Gson();
+
+			// Gson gson = new Gson();
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			String jsonData = gson.toJson(student,Student.class);
+			String jsonData = gson.toJson(student, Student.class);
 			JsonElement jsonElement = gson.toJsonTree(student);
-			
-			
-			
-			if(student!=null) {
-				
-				
-				
+
+			if (student != null) {
+
 				jsonElement.getAsJsonObject().addProperty("status", "success");
 				jsonData = gson.toJson(jsonElement);
-				
+
 				response.getWriter().print(jsonData);
-			}else {
-				
+			} else {
+
 				/*
 				 * String jsonData = gson.toJson(student,Student.class); JsonElement jsonElement
 				 * = gson.toJsonTree(student);
 				 */
-				
+
 				response.getWriter().print("failure");
 			}
-			
+
 		}
-		
+
 		if (request.getRequestURI().endsWith("updateStudent")) {
-			
+
 			IStudentService studentService = StudentServiceFactory.getStudentService();
-			
+
 			String student_id = request.getParameter("studentId");
-			//System.out.println(student_id);
+			// System.out.println(student_id);
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
-			//System.out.println(firstName);
-			//String name = request.getParameter(firstName+" "+lastName);
+			// System.out.println(firstName);
+			// String name = request.getParameter(firstName+" "+lastName);
 			String email = request.getParameter("email");
 			String department = request.getParameter("department");
 			String password = request.getParameter("password");
 			String mobile = request.getParameter("mobile");
-		
+
 			String address = request.getParameter("address");
-			
+
 			String dob = request.getParameter("date");
 			System.out.println(dob);
 			String gender = request.getParameter("radio");
@@ -223,21 +210,21 @@ public class LibraryController extends HttpServlet {
 			Student student = new Student();
 
 			student.setStudentId(student_id);
-			String name = firstName+" "+lastName;
+			String name = firstName + " " + lastName;
 			student.setName(name);
 			student.setAddress(address);
 			student.setDepartment(department);
 			student.setEmail(email);
-			
+
 			Date date = null;
 			try {
 				date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
-				System.out.println("date==="+date);
+				System.out.println("date===" + date);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
-			
+			}
+
 			student.setDob(date);
 			student.setPassword(password);
 			student.setMobile(mobile);
@@ -246,37 +233,35 @@ public class LibraryController extends HttpServlet {
 			String status = studentService.updateStudent(student);
 			RequestDispatcher rd = null;
 			if (status.equals("success")) {
-				//request.setAttribute("status", "success");
+				// request.setAttribute("status", "success");
 				response.getWriter().print("success");
-				
-				//rd = request.getRequestDispatcher("../updatesuccess.jsp");
-				//rd.forward(request, response);
+
+				// rd = request.getRequestDispatcher("../updatesuccess.jsp");
+				// rd.forward(request, response);
 			} else {
-				//request.setAttribute("status", "failure");
-				//rd = request.getRequestDispatcher("../updatesuccess.jsp");
-				//.forward(request, response);
+				// request.setAttribute("status", "failure");
+				// rd = request.getRequestDispatcher("../updatesuccess.jsp");
+				// .forward(request, response);
 				response.getWriter().print("failure");
 			}
 		}
 
 		if (request.getRequestURI().endsWith("deleteStudent")) {
-			
+
 			IStudentService studentService = StudentServiceFactory.getStudentService();
-			
+
 			String studentId = request.getParameter("studentId");
 
 			String status = studentService.deleteStudent(studentId);
 			RequestDispatcher rd = null;
 			if (status.equals("success")) {
-				
+
 				response.getWriter().print("success");
 			} else {
-				
-				
+
 				response.getWriter().print("failure");
 			}
 		}
-
 
 	}
 
@@ -325,7 +310,7 @@ public class LibraryController extends HttpServlet {
 		IssuedBooks issuedBooks = new IssuedBooks();
 		issuedBooks.setIssuedId(issueId);
 		issuedBooks.setBookId(bookId);
-		//issuedBooks.setIssuedId("issued001");
+		// issuedBooks.setIssuedId("issued001");
 		issuedBooks.setStudentId(studentId);
 		issuedBooks.setLibrarianId(librarianId);
 		issuedBooks.setIssueDate(issueDate);
@@ -394,12 +379,28 @@ public class LibraryController extends HttpServlet {
 
 		ILibrarianService libService = LibrarianServiceFactory.getLibrarianService();
 
-		if (request.getRequestURI().endsWith("addLibrarian")) {
+		if (request.getRequestURI().endsWith("registerLibrarian")) {
 
-			String name = request.getParameter("name");
+			// GenrateUniqueAlphaNumericId obj = new GenrateUniqueAlphaNumericId();
+			// String studentId = obj.genrateUniqueId(2);
+
+			// System.out.println(student_id);
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
+			// System.out.println(firstName);
+			// String name = request.getParameter(firstName+" "+lastName);
 			String email = request.getParameter("email");
+
 			String password = request.getParameter("password");
 			String mobile = request.getParameter("mobile");
+
+			//String address = request.getParameter("address");
+
+			String dob = request.getParameter("date");
+
+			String gender = request.getParameter("radio");
+
+			String name = firstName + " " + lastName;
 
 			Librarian librarian = new Librarian();
 			GenrateUniqueAlphaNumericId obj = new GenrateUniqueAlphaNumericId();
@@ -412,23 +413,43 @@ public class LibraryController extends HttpServlet {
 			librarian.setMobile(mobile);
 			librarian.setPassword(password);
 
+			Date date = null;
+			try {
+				date = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+				System.out.println("date===" + date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			librarian.setDob(date);
+			librarian.setGender(gender);
+
 			String status = libService.addLibrarian(librarian);
 
 			RequestDispatcher rd = null;
 
 			if (status.equals("success")) {
-
-				System.out.println("sucess-------------");
 				request.setAttribute("status", "success");
-				request.setAttribute("bookService", "success");
-				rd = request.getRequestDispatcher("../registration.jsp");
-				rd.forward(request, response);
+
+				Gson gson = new Gson();
+
+				String jsonData = gson.toJson(librarian, Librarian.class);
+				JsonElement jsonElement = gson.toJsonTree(librarian);
+
+				jsonElement.getAsJsonObject().addProperty("status", "success");
+				jsonData = gson.toJson(jsonElement);
+
+				// SendEmail.sendMail(student.getEmail());
+				// SentEmail2.sentMail();
+				rd = request.getRequestDispatcher("../studentjsppages/statusResult.jsp");
+				response.getWriter().print(jsonData);
+
 				// response.sendRedirect("../registration.jsp");
 			} else {
-				System.out.println("failure-------------");
 				request.setAttribute("status", "failure");
-				rd = request.getRequestDispatcher("../registration.jsp");
-				rd.forward(request, response);
+				rd = request.getRequestDispatcher("../studentjsppages/statusResult.jsp");
+				response.getWriter().print("failure");
 
 				// response.sendRedirect("../registration.jsp");
 			}

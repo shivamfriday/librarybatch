@@ -58,8 +58,8 @@
 			<div class="d-flex align-items-center" style="position: relative;float: right;">
 
 
-			<%-- 	<ul class="nav navbar-nav">
-					<li class="nav-item text-center" id="signup-btn"><a href="#"
+				<ul class="nav navbar-nav" style="margin-left:960px">
+					<li class="nav-item text-center" id="signup-btn"><a href="<%=request.getContextPath()%>/studentRegistraion.jsp"
 						class="nav-link" data-toggle="modal" data-target="#"><span
 							class="fa fa-user"></span><span
 							class="d-none d-sm-inline d-xl-block px-1"><c:out
@@ -70,7 +70,7 @@
 							class="fa fa-sign-in"></span><span
 							class="d-none d-sm-inline d-xl-block px-1">Log In</span></a></li>
 				</ul>
- --%>
+
 
 
 			

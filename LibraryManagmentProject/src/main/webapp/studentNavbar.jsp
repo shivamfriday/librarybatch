@@ -76,8 +76,7 @@
 							<li class="nav-item text-center" id="signup-btn"><a href="#"
 								class="nav-link" data-toggle="modal" data-target="#"><span
 									class="fa fa-user"></span> <span
-									class="d-none d-sm-inline d-xl-block px-1"><c:out
-											value="${studentObj.getStudentId()}" /> <input type="hidden"
+									class="d-none d-sm-inline d-xl-block px-1">Your Name <input type="hidden"
 										value="${studentObj.getStudentId()}" id="studentId" name="studentId">
 								</span></a></li>
 							<li class="nav-item text-center" id="login-btn"><a
