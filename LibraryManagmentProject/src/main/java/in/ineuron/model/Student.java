@@ -1,16 +1,38 @@
 package in.ineuron.model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Student {
 		
 	private String studentId;
 	private String name;
-	private String depqartment;
+	private String department;
 	private String section;
 	private String password;
+	private String email;
 	private String mobile;
 	private String address;
 	
+	private Date dob;
+	private String gender;
 	
+	
+	
+	
+	public Date getDob() {
+		return dob;
+	}
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getStudentId() {
 		return studentId;
 	}
@@ -23,12 +45,7 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDepqartment() {
-		return depqartment;
-	}
-	public void setDepqartment(String depqartment) {
-		this.depqartment = depqartment;
-	}
+	
 	public String getSection() {
 		return section;
 	}
@@ -52,6 +69,18 @@ public class Student {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

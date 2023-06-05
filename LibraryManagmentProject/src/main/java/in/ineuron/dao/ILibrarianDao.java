@@ -6,7 +6,7 @@ public interface ILibrarianDao {
 	
 	public String addLibrarian(Librarian libarian);
 
-	public Librarian searchLibarian(Integer sid);
+	public Librarian getLibrarian(String email,String password);
 
 	public String updateLibarian(Librarian libarian);
 

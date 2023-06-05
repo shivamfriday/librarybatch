@@ -38,7 +38,17 @@ public class JdbcUtil {
 		String url = properties.getProperty("jdbcUrl");
 		String username = properties.getProperty("user");
 		String password = properties.getProperty("password");
-		
+		System.out.println(url);
 		return DriverManager.getConnection(url, username, password);
+	}
+	
+	public static void closeConnection(Connection connection) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

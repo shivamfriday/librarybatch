@@ -187,13 +187,18 @@ h2 {
 
 .main {
   background: #f8f8f8;
-  padding: 50px 0; }
+  padding: 50px 0; 
+  width:1000px;
+  height:300px;
+  font-size: 15px;
+  margin-left:300px;
+  }
 
 .clear {
   clear: both; }
 
 body {
-  font-size: 13px;
+  font-size: 20px;
   line-height: 1.8;
   color: #222;
   background: #f8f8f8;
@@ -588,5 +593,12 @@ label.valid {
   .social-label {
     margin-right: 0px;
     margin-bottom: 10px; } }
+    
+    .borderless table {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
 
 /*# sourceMappingURL=style.css.map */

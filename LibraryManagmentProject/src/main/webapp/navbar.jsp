@@ -1,31 +1,26 @@
 <%@page language="java" contentType="text/html"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix = 'c'%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
 <title>Bootstrap Navbar Dropdown Login and Signup Form with Social Buttons</title>
 <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/commons-bootstrap.css">
 
-<script>
-	// Prevent dropdown menu from closing when click inside the form
-	$(document).on("click", ".navbar-right .dropdown-menu", function(e){
-		e.stopPropagation();
-	});
-</script>
+
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/commons-bootstrap.css">
+
+
   
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-inverse navbar-expand-sm sticky-top navbar-dark">
 	<div class="navbar-header navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Library<b>Mangament</b></a>  		
 		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -40,28 +35,41 @@
 		<ul class="nav navbar-nav">
 			<li><a href="#">Home</a></li>
 			<li><a href="#">About</a></li>			
-			<li class="dropdown">
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#">Services <b class="caret"></b></a>
-				<ul class="dropdown-menu">					
-					<li><a href="#">Web Design</a></li>
-					<li><a href="#">Web Development</a></li>
-					<li><a href="#">Graphic Design</a></li>
-					<li><a href="#">Digital Marketing</a></li>
-				</ul>
-			</li>
+			
 			<li class="active"><a href="#">Pricing</a></li>
 			<li><a href="#">Blog</a></li>
 			<li><a href="#">Contact</a></li>
+			<li class="dropdown ">
+				<a data-toggle="dropdown" aria-expanded="false"  aria-haspopup="true" class="dropdown-toggle " href="#">Books </a>
+				<ul class="dropdown-menu dropdown-menu-lg-end " style="" aria-labelledby="navbarDropdown">					
+					<li><a href="login.jsp">Add Books</a></li>
+					<li><a href="#">Update Books</a></li>
+					<li><a href="#">Delete Books</a></li>
+					<li><a href="#">Digital Marketing</a></li>
+				</ul>
+			</li>
 		</ul>
-		<form class="navbar-form form-inline">
+		<form class="navbar-form form-inline" action="./booksController/searchBookByAuthor" method="Get">
 			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search here...">
+				<input type="text" id="search" name="authorName" class="form-control" placeholder="Search here...">
+				<input type="hidden" id="search" name="redirected" class="form-control" value="">
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+				
 			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
 		</form>
 		<ul class="nav navbar-nav navbar-right">			
 			<li>
-				<a data-toggle="dropdown" class="dropdown-toggle" href="login.jsp">Login</a>
+			
+				<c:choose>
+					<c:when test="${empty studentObj }">
+						<a  class="dropdown-toggle" href="login.jsp">Login</a>
+					</c:when>
+					<c:otherwise>
+						<a   href="<%=request.getContextPath()%>/studentController/logout">Logout</a>
+					</c:otherwise>
+				</c:choose>
+				
 				<!-- <ul class="dropdown-menu form-wrapper">					
 					<li>
 						<form action="/examples/actions/confirmation.php" method="post">
@@ -84,9 +92,26 @@
 						</form>
 					</li>
 				</ul> -->
+				
+				
 			</li>
 			<li>
-				<a href="registration.jsp" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+				
+				
+				
+				<c:choose>
+					<c:when test="${empty studentObj }">
+						<a href="registration.jsp" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">${studentObj.getName()}</a>
+					</c:otherwise>
+				</c:choose>
+				
+				
+				
+				
+				
 				<!-- <ul class="dropdown-menu form-wrapper">					
 					<li>
 						<form action="/examples/actions/confirmation.php" method="post">
@@ -137,6 +162,17 @@
   <h3>Inverted Navbar</h3>
   <p>An inverted navbar is black instead of gray.</p>
 </div> -->
+
+<script>
+	// Prevent dropdown menu from closing when click inside the form
+	$(document).on("click", ".navbar-right .dropdown-menu", function(e){
+		e.stopPropagation();
+	});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<%= request.getContextPath()%>/js/scripts.js"></script>
 
 </body>
 </html>
