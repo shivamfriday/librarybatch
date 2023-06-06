@@ -17,6 +17,8 @@ public interface ILibrarianService {
 	public String AssignBookToStudent(IssuedBooks issueBook);
 
 	public String removeIssuedBooks(String studentId,String bookId);
+
+	public String updatePassword(String email, String newPassword, String confPassword);
 		
 	
 

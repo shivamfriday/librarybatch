@@ -114,4 +114,40 @@ public class LibrarianDaoImpl implements ILibrarianDao {
 		return null;
 	}
 
+	@Override
+	public String updatePassword(String email, String newPassword, String confPassword) {
+		// TODO Auto-generated method stub
+		
+		String sqlUpdateQuery = "update librarians set password=? where email=?";
+		System.out.println(email);
+		try {
+			connection = JdbcUtil.getJdbcConnection();
+			if(connection!=null) {
+				pstmt = connection.prepareStatement(sqlUpdateQuery);
+				
+			}
+			if(pstmt!=null) {
+				
+				pstmt.setString(1,newPassword);
+				pstmt.setString(2,email);
+				
+				
+				int rowCount = pstmt.executeUpdate();
+				System.out.println("empty--------"+rowCount);
+				if (rowCount > 0) {
+					return "success";
+				} else {
+					return "failure";
+				}
+				
+				
+			}
+		}catch(SQLException | IOException e){
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
 }

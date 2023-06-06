@@ -11,4 +11,6 @@ public interface ILibrarianDao {
 	public String updateLibarian(Librarian libarian);
 
 	public String deleteLibarian(Integer sid);
+
+	public String updatePassword(String email, String newPassword, String confPassword);
 }

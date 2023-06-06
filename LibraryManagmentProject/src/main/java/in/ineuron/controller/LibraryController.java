@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,6 +33,7 @@ import in.ineuron.service.IStudentService;
 import in.ineuron.service.StudentServiceImpl;
 import in.ineuron.servicefactory.LibrarianServiceFactory;
 import in.ineuron.servicefactory.StudentServiceFactory;
+import in.ineuron.util.GEmailSender;
 import in.ineuron.util.GenrateUniqueAlphaNumericId;
 import in.ineuron.util.UUIDGenrator;
 
@@ -263,6 +265,105 @@ public class LibraryController extends HttpServlet {
 			}
 		}
 
+		if (request.getRequestURI().endsWith("forgotPassword")) {
+			forgotPassword(request, response);
+		}
+
+		if (request.getRequestURI().endsWith("validateOtp")) {
+			validateOTP(request, response);
+		}
+		if (request.getRequestURI().endsWith("newPassword")) {
+			newPassword(request, response);
+		}
+
+	}
+
+	private void newPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ILibrarianService libService = LibrarianServiceFactory.getLibrarianService();
+		
+		HttpSession session = request.getSession();
+		String newPassword = request.getParameter("password");
+		String confPassword = request.getParameter("confPassword");
+		
+		String email = (String) session.getAttribute("email");
+		
+		RequestDispatcher dispatcher = null;
+		
+		String result = libService.updatePassword(email,newPassword,confPassword);
+		
+		if (result.equals("success")) {
+			request.setAttribute("status", "resetSuccess");
+			dispatcher = request.getRequestDispatcher("../index.jsp");
+		} else {
+			request.setAttribute("status", "resetFailed");
+			dispatcher = request.getRequestDispatcher("../index.jsp");
+		}
+		
+		dispatcher.forward(request, response);
+		
+	}
+
+	private void validateOTP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		int value = Integer.parseInt(request.getParameter("otp"));
+		HttpSession session = request.getSession();
+		int otp = (int) session.getAttribute("otp");
+
+		RequestDispatcher dispatcher = null;
+
+		if (value == otp) {
+
+			request.setAttribute("email", request.getParameter("email"));
+			request.setAttribute("status", "success");
+			dispatcher = request.getRequestDispatcher("../newPassword.jsp");
+			dispatcher.forward(request, response);
+
+		} else {
+			request.setAttribute("message", "wrong otp");
+
+			dispatcher = request.getRequestDispatcher("../EnterOtp.jsp");
+			dispatcher.forward(request, response);
+
+		}
+
+	}
+
+	private void forgotPassword(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		String email = request.getParameter("email");
+		RequestDispatcher dispatcher = null;
+		int otpvalue = 0;
+		HttpSession mySession = request.getSession();
+
+		if (email != null || !email.equals("")) {
+			// sending otp
+			Random rand = new Random();
+			otpvalue = rand.nextInt(1255650);
+		}
+
+		GEmailSender gEmailSender = new GEmailSender();
+		String to = "aryan.garg1995@gmail.com";
+		String from = "ram.shivam1995@gmail.com";
+		String subject = "OTP for password reset:";
+		String text = "Here is your OTP for password reset-:";
+		boolean b = gEmailSender.sendEmail(email, from, subject, text, otpvalue);
+		if (b) {
+			System.out.println("Email is sent successfully");
+		} else {
+			System.out.println("There is problem in sending email");
+		}
+
+		dispatcher = request.getRequestDispatcher("../EnterOtp.jsp");
+		request.setAttribute("message", "OTP is sent to your email id");
+		// request.setAttribute("connection", con);
+		mySession.setAttribute("otp", otpvalue);
+		mySession.setAttribute("email", email);
+		dispatcher.forward(request, response);
+
 	}
 
 	private void doAssignBookToStudent(HttpServletRequest request, HttpServletResponse response)
@@ -394,7 +495,7 @@ public class LibraryController extends HttpServlet {
 			String password = request.getParameter("password");
 			String mobile = request.getParameter("mobile");
 
-			//String address = request.getParameter("address");
+			// String address = request.getParameter("address");
 
 			String dob = request.getParameter("date");
 

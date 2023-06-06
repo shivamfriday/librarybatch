@@ -69,4 +69,17 @@ public class LibrarianServiceImpl implements ILibrarianService {
 		
 	}
 
+	@Override
+	public String updatePassword(String email, String newPassword, String confPassword) {
+		// TODO Auto-generated method stub
+		
+		libDao = LibrarianDaoFactory.getLibrarianDao();
+
+		String msg = libDao.updatePassword(email, newPassword,confPassword);
+		//System.out.println(lib);
+		
+		
+		return msg;
+	}
+
 }

@@ -86,7 +86,7 @@
 
         <div class="col-md-6 d-flex justify-content-center">
           <!-- Simple link -->
-          <a href="#!">Forgot password?</a>
+          <a href="<%=request.getContextPath()%>/forgotPassword.jsp">Forgot password?</a>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
 
         <div class="col-md-6 d-flex justify-content-center">
           <!-- Simple link -->
-          <a href="#!">Forgot password?</a>
+          <a href="#">Forgot password? Contact your librarian he will update your password</a>
         </div>
       </div>
 
