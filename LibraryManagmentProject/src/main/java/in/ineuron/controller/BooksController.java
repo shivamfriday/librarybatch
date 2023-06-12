@@ -227,9 +227,9 @@ public class BooksController extends HttpServlet {
 
 		if (request.getRequestURI().endsWith("addBooks")) {
 
-			GenrateUniqueAlphaNumericId obj = new GenrateUniqueAlphaNumericId();
+			//GenrateUniqueAlphaNumericId obj = new GenrateUniqueAlphaNumericId();
 
-			String bookId = obj.genrateUniqueId(2);
+			//String bookId = obj.genrateUniqueId(2);
 
 			// String bookId = request.getParameter("bookId");
 			String authorName = request.getParameter("authorName");
@@ -280,6 +280,17 @@ public class BooksController extends HttpServlet {
 				System.out.println("sucess-------------");
 				request.setAttribute("status", "success");
 				rd = request.getRequestDispatcher("/addBooks2.jsp");
+				// after adding a book fetching the updated book and setting into the session
+				HttpSession session = request.getSession(true);
+			      
+				RequestDispatcher rd3 = null;
+				List<Books> getAllBooks = bookservice.searchBook();
+				System.out.println(getAllBooks);
+				//request.setAttribute("allBooks", allBooks);
+				//request.setAttribute("getAllBooks", getAllBooks);
+				session.setAttribute("getAllBooks", getAllBooks);
+				
+				
 				rd.forward(request, response);
 				// response.sendRedirect("../registration.jsp");
 			} else {

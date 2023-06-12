@@ -3,7 +3,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<a class="navbar-brand" href="#">Search By :</a>
 			<form id="myform" method="get"
-				action="../booksController/searchBookById"
+				action="<%= request.getContextPath()%>/booksController/searchBookById"
 				class="d-flex input-group w-auto">
 				<input type="search" class="form-control" placeholder="Serach By Id"
 					aria-label="Search" name="valueForSearch" />
@@ -69,7 +69,7 @@
 
 <script>
  	$(document).ready(function({
- 		console.log("page is ready...");
+ 		
  		$("#myform").on('submit',function(event){
  			event.preventDefault();
  			

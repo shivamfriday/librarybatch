@@ -294,10 +294,10 @@ public class LibraryController extends HttpServlet {
 		
 		if (result.equals("success")) {
 			request.setAttribute("status", "resetSuccess");
-			dispatcher = request.getRequestDispatcher("../index.jsp");
+			dispatcher = request.getRequestDispatcher("../login2.jsp");
 		} else {
 			request.setAttribute("status", "resetFailed");
-			dispatcher = request.getRequestDispatcher("../index.jsp");
+			dispatcher = request.getRequestDispatcher("../login2.jsp");
 		}
 		
 		dispatcher.forward(request, response);
@@ -458,17 +458,20 @@ public class LibraryController extends HttpServlet {
 
 				session.setAttribute("libObj", lib);
 				System.out.println("context path==" + request.getContextPath());
+				response.getWriter().print("success");
+				
 				// rd =
 				// request.getRequestDispatcher("../"+request.getContextPath()+"/librarianWelcome.jsp");
-				rd = request.getRequestDispatcher("../librarianWelcome.jsp");
+				//rd = request.getRequestDispatcher("../librarianWelcome.jsp");
 				// System.out.println("success login&&&&&&&&&&&&&&&&&&&&&&&&" + lib.getName());
 			} else {
 				request.setAttribute("status", "failure");
-				rd = request.getRequestDispatcher("../login.jsp");
+				response.getWriter().print("failure");
+				//rd = request.getRequestDispatcher("../index.jsp");
 				// System.out.println("failed login&&&&&&&&&&&&&&&&&&&&&&&&");
 			}
 
-			rd.forward(request, response);
+			//rd.forward(request, response);
 
 		}
 

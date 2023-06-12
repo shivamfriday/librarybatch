@@ -79,9 +79,9 @@
 									class="d-none d-sm-inline d-xl-block px-1">Your Name <input type="hidden"
 										value="${studentObj.getStudentId()}" id="studentId" name="studentId">
 								</span></a></li>
-							<li class="nav-item text-center" id="login-btn"><a
+							<li class="nav-item text-center" id="login-btn"><a type="button"
 								href="<%=request.getContextPath()%>/logout.jsp" class="nav-link"
-								data-toggle="modal" data-target="#"><span
+								><span
 									class="fa fa-sign-in"></span><span
 									class="d-none d-sm-inline d-xl-block px-1">Log Out</span></a></li>
 						</ul>

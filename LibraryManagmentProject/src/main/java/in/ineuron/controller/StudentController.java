@@ -167,14 +167,16 @@ public class StudentController extends HttpServlet {
 
 					// out.println("<h2 style='color:green; text-align:center'>password not matches.
 					// Please type correct passowrd</h2>");
-					rd = request.getRequestDispatcher("/failure.jsp");
-					rd.include(request, response);
+					//rd = request.getRequestDispatcher("/failure.jsp");
+					response.getWriter().print("not matches");
+					//rd.include(request, response);
 
 				} else if (status.equals("not exists")) {
 					System.out.println("not exists--------------");
 					request.setAttribute("status", "not exists");
-					rd = request.getRequestDispatcher("/failure.jsp");
-					rd.forward(request, response);
+					response.getWriter().print("not exists");
+					//rd = request.getRequestDispatcher("/failure.jsp");
+					//rd.forward(request, response);
 				}
 
 			} else if (status instanceof Student) {
@@ -189,7 +191,8 @@ public class StudentController extends HttpServlet {
 
 				session.setAttribute("studentObj", status);
 				rd = request.getRequestDispatcher("/studentWelcome.jsp");
-				rd.forward(request, response);
+				response.getWriter().print("success");
+				//rd.forward(request, response);
 			}
 
 		}

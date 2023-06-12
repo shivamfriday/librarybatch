@@ -414,7 +414,7 @@ console.log(status);
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${sessionScope.getAllBooks}" var="item">
+						<c:forEach items="${getAllBooks}" var="item">
 							<%
 							Books item2 = (Books) pageContext.getAttribute("item");
 

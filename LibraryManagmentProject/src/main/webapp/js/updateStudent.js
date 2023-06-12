@@ -156,6 +156,7 @@ $('#submitFormButton').on('click', submitFormButtonFunction);
 
 var deleteFormButtonFunction = function(e) {
 	var dataVar = $("#myForm").serialize();
+	//alert(dataVar)
 
 	var urlParam = "/LibraryManagmentProject/librarianController/deleteStudent";
 
@@ -168,7 +169,7 @@ var deleteFormButtonFunction = function(e) {
 		data: obj,
 		type: 'POST',
 		success: function(data) {
-			alert(data)
+			//alert(data)
 			if (data == "success") {
 
 				swal({
@@ -185,7 +186,7 @@ var deleteFormButtonFunction = function(e) {
 				//alert(resultText)
 				swal({
 					title: "Error!",
-					text: resultText,
+					text: "you can't delete the sutdent because he is having a book ",
 					type: "error",
 					confirmButtonText: "Cool"
 				});
@@ -195,7 +196,12 @@ var deleteFormButtonFunction = function(e) {
 
 		},
 		error: function(data, testStatus, jqXHR) {
-
+				swal({
+					title: "Error!",
+					text: "you can't delete the sutdent because he is having a book ",
+					type: "error",
+					confirmButtonText: "Cool"
+				});
 		}
 
 

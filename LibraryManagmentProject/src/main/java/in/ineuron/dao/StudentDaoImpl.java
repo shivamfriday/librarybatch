@@ -159,6 +159,7 @@ public class StudentDaoImpl implements IStudentDao {
 	@Override
 	public String deleteStudent(String sid) {
 		String query = "delete from students where student_id=?";
+		
 		Integer rowAffected = null;
 		try {
 			connection = JdbcUtil.getJdbcConnection();
