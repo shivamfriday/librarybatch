@@ -515,8 +515,7 @@ console.log(status);
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">ENTER STUDNET
-							ID FOR ASSIGNING A BOOK</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Update Book Details:</h5>
 						<button data-close-button type="button" class="close-button"></button>
 					</div>
 					<div class="modal-body">

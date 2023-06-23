@@ -15,6 +15,7 @@ import java.util.List;
 
 import in.ineuron.model.Books;
 import in.ineuron.model.IssuedBooks;
+import in.ineuron.util.GenrateUniqueAlphaNumericId;
 import in.ineuron.util.JdbcUtil;
 import in.ineuron.util.UUIDGenrator;
 
@@ -53,8 +54,12 @@ public class IssuedBooksImpl implements IIssuedBooksDao {
 				pstmt1.setString(1, issuedBook.getStudentId());
 			}
 			if (pstmt2 != null) {
+				
+				GenrateUniqueAlphaNumericId obj = new GenrateUniqueAlphaNumericId();
+				
+				String libId = obj.genrateUniqueId(3);
 
-				String libId = "02cd9e11-e6c0-45f4-a5ff-595b7f602112";
+				//String libId = "02cd9e11-e6c0-45f4-a5ff-595b7f602112";
 
 				pstmt2.setString(1, UUIDGenrator.getUniqueId());
 				pstmt2.setString(2, issuedBook.getBookId());
